@@ -153,14 +153,15 @@ resource "null_resource" "patch_argocd_service" {
 }
 
 # Application namespace - managed by ArgoCD Application manifest
-# Commenting out to avoid stuck namespace during destroy
-# The namespace is created by ArgoCD from the GitOps repository
-resource "kubernetes_namespace_v1" "app" {
-  metadata {
-    name = "3tierwebapp-dev"
-  }
-  depends_on = [module.eks]
-}
+# Application namespace is created by ArgoCD from the GitOps repository
+# Do not manage the app namespace with Terraform to avoid namespace deletion hangs.
+
+# resource "kubernetes_namespace_v1" "app" {
+#   metadata {
+#     name = "3tierwebapp-dev"
+#   }
+#   depends_on = [module.eks]
+# }
 
 # Deploy application via ArgoCD Application CRD
 resource "kubectl_manifest" "app_deployment" {
