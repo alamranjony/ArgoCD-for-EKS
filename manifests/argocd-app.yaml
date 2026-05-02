@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/alamranjony/ArgoCD-for-EKS.git
     targetRevision: main
-    path: 3tier-configs
+    path: manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: 3tierwebapp-dev
